@@ -15,6 +15,10 @@ public class LaberintoMagico {
     private Map<Character, List<Coordenada>> ubicacionesPortales = new HashMap<>();
 
 
+    /**
+     * En un mapa guardamos las coordenadas de cada tipo de portal
+     * @param laberinto mapa del laberinto
+     */
     private void mapearPortales(char[][] laberinto){
         for(int i = 0 ;  i < laberinto.length ; i++){ //columnas
             for (int j = 0 ; j < laberinto[0].length ; j++){ //fila
@@ -27,6 +31,14 @@ public class LaberintoMagico {
     }
 
 
+    /**
+     * @param laberinto tablero
+     * @param pasos seguimiento de los pasos en cada iteracion
+     * @param filaActual ubicacion en el tablero actual fila
+     * @param columnaActual ubicacion en el tablero actual columna
+     * @param pisados arreglo que marca las casillas ya visitadas
+     * @return mejor costo encontrado o -1 si no se encontro una salida
+     */
     public int getMinCostoSalida (char[][] laberinto, int pasos, int filaActual , int columnaActual, boolean[][] pisados) {
         mapearPortales(laberinto);
         getCostoSalida(laberinto,pasos,filaActual,columnaActual,pisados);
@@ -40,12 +52,11 @@ public class LaberintoMagico {
 
     public void getCostoSalida(char[][] laberinto, int pasos, int filaActual , int columnaActual, boolean[][] pisados){
 
-
         if(laberinto[filaActual][columnaActual] == 'S'){
             mejorCosto = Math.min(pasos, mejorCosto);
         } else {
 
-
+            // Si la posicion actual es un portal
             if(laberinto[filaActual][columnaActual] >= 'a' && laberinto[filaActual][columnaActual] <= 'z'){
 
                 for(Coordenada coor : ubicacionesPortales.get(laberinto[filaActual][columnaActual])){
@@ -82,6 +93,9 @@ public class LaberintoMagico {
         }
     }
 
+    /**
+     * Para manejar facilmente la ubicacion de los portales
+     */
     private class Coordenada {
         public int fila;
         public int columna;

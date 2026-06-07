@@ -11,6 +11,11 @@ public class PalabraMasUsada {
         this.wordCount = new HashMap<>();
     }
 
+    /**
+     * @param texto del cual se extraen las palabras
+     * @param N longitud minima de las palabras
+     * @return la palabra más usada en texto
+     */
     public String getPalabraMasUsada(String texto, int N){
         texto = texto.toLowerCase();
 
@@ -21,6 +26,8 @@ public class PalabraMasUsada {
         System.out.println(Arrays.toString(palabras) + palabras.length);
 
 
+        // Se cuentan las palabras y se van almacenando en un mapa.
+        // A la vez se lleva en cada iteracion la palabra más usada hasta el momento y su conteo.
         String palabraMasUsadaHastaAhora = "";
         int cantidadMasUsada = -1000;
         for (String palabra : palabras){
